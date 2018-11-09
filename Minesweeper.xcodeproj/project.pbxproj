@@ -8,20 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		03595FC82191754400D706D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FC72191754400D706D5 /* AppDelegate.swift */; };
-		03595FCA2191754400D706D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FC92191754400D706D5 /* ViewController.swift */; };
 		03595FCD2191754400D706D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03595FCB2191754400D706D5 /* Main.storyboard */; };
 		03595FCF2191754600D706D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03595FCE2191754600D706D5 /* Assets.xcassets */; };
 		03595FD22191754600D706D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03595FD02191754600D706D5 /* LaunchScreen.storyboard */; };
+		03595FDA2191760800D706D5 /* GridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FD92191760800D706D5 /* GridCollectionViewController.swift */; };
+		03595FDC2191837E00D706D5 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDB2191837D00D706D5 /* NewGameViewController.swift */; };
+		03595FDE2191A12400D706D5 /* GridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDD2191A12400D706D5 /* GridCollectionViewCell.swift */; };
+		03595FE02192FCC700D706D5 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDF2192FCC600D706D5 /* Tile.swift */; };
+		03595FE22195199E00D706D5 /* CALayer+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FE12195199E00D706D5 /* CALayer+Border.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		03595FC42191754400D706D5 /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03595FC72191754400D706D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		03595FC92191754400D706D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		03595FCC2191754400D706D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03595FCE2191754600D706D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03595FD12191754600D706D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03595FD32191754600D706D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03595FD92191760800D706D5 /* GridCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewController.swift; sourceTree = "<group>"; };
+		03595FDB2191837D00D706D5 /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
+		03595FDD2191A12400D706D5 /* GridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCell.swift; sourceTree = "<group>"; };
+		03595FDF2192FCC600D706D5 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		03595FE12195199E00D706D5 /* CALayer+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Border.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +62,82 @@
 		03595FC62191754400D706D5 /* Minesweeper */ = {
 			isa = PBXGroup;
 			children = (
-				03595FC72191754400D706D5 /* AppDelegate.swift */,
-				03595FC92191754400D706D5 /* ViewController.swift */,
-				03595FCB2191754400D706D5 /* Main.storyboard */,
-				03595FCE2191754600D706D5 /* Assets.xcassets */,
-				03595FD02191754600D706D5 /* LaunchScreen.storyboard */,
+				03595FEA21951BCA00D706D5 /* Storyboards */,
+				03595FE921951B5900D706D5 /* Assets */,
+				03595FE521951AEC00D706D5 /* Application */,
+				03595FE421951A3300D706D5 /* Models */,
+				03595FE3219519C300D706D5 /* Extensions */,
 				03595FD32191754600D706D5 /* Info.plist */,
 			);
 			path = Minesweeper;
+			sourceTree = "<group>";
+		};
+		03595FE3219519C300D706D5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				03595FE12195199E00D706D5 /* CALayer+Border.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		03595FE421951A3300D706D5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				03595FDF2192FCC600D706D5 /* Tile.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		03595FE521951AEC00D706D5 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				03595FE821951B3C00D706D5 /* New Game */,
+				03595FE721951B1500D706D5 /* Main */,
+				03595FE621951AF400D706D5 /* Game Grid */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		03595FE621951AF400D706D5 /* Game Grid */ = {
+			isa = PBXGroup;
+			children = (
+				03595FD92191760800D706D5 /* GridCollectionViewController.swift */,
+				03595FDD2191A12400D706D5 /* GridCollectionViewCell.swift */,
+			);
+			path = "Game Grid";
+			sourceTree = "<group>";
+		};
+		03595FE721951B1500D706D5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				03595FC72191754400D706D5 /* AppDelegate.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		03595FE821951B3C00D706D5 /* New Game */ = {
+			isa = PBXGroup;
+			children = (
+				03595FDB2191837D00D706D5 /* NewGameViewController.swift */,
+			);
+			path = "New Game";
+			sourceTree = "<group>";
+		};
+		03595FE921951B5900D706D5 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				03595FCE2191754600D706D5 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		03595FEA21951BCA00D706D5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				03595FCB2191754400D706D5 /* Main.storyboard */,
+				03595FD02191754600D706D5 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +211,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03595FCA2191754400D706D5 /* ViewController.swift in Sources */,
+				03595FDE2191A12400D706D5 /* GridCollectionViewCell.swift in Sources */,
+				03595FE22195199E00D706D5 /* CALayer+Border.swift in Sources */,
+				03595FDA2191760800D706D5 /* GridCollectionViewController.swift in Sources */,
+				03595FE02192FCC700D706D5 /* Tile.swift in Sources */,
 				03595FC82191754400D706D5 /* AppDelegate.swift in Sources */,
+				03595FDC2191837E00D706D5 /* NewGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
