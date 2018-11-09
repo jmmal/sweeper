@@ -10,6 +10,12 @@ import UIKit
 
 private let reuseIdentifier = "SweeperCell"
 
+enum GameState {
+    case inProgress
+    case fail
+    case win
+}
+
 class GridCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem!
@@ -21,7 +27,7 @@ class GridCollectionViewController: UICollectionViewController, UICollectionView
     
     var game = [[Tile]]()
     
-    var gameEnded = false
+    var gameState: GameState = .inProgress
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,12 +68,13 @@ class GridCollectionViewController: UICollectionViewController, UICollectionView
         let row = indexPath.row
         let col = indexPath.section
         
-        if gameEnded {
+        if gameState == .fail || gameState == .win {
             return
         }
         
         if game[row][col].isMine {
-            gameEnded = true
+            gameState = .fail
+            self.navigationItem.title = "😤"
             endGame()
             return
         }
@@ -83,18 +90,18 @@ class GridCollectionViewController: UICollectionViewController, UICollectionView
         }
         
         // If the cell has not be previously revealed
-        if !game[row][col].isShown {
-            if game[row][col].surroundingMinesCount == 0 && !game[row][col].isMine {
-                selectSurroundingCells(row, col)
-                game[row][col].isShown = true
-                
-                collectionView.reloadData()
-                return
-            }
-            
+        if game[row][col].surroundingMinesCount == 0 && !game[row][col].isMine {
+            selectSurroundingCells(row, col)
             game[row][col].isShown = true
-            collectionView.reloadItems(at: [indexPath])
+            
+            collectionView.reloadData()
+            return
         }
+        
+        game[row][col].isShown = true
+        checkGameState()
+        
+        collectionView.reloadItems(at: [indexPath])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -178,6 +185,23 @@ class GridCollectionViewController: UICollectionViewController, UICollectionView
         }
     }
     
+    func checkGameState() {
+        for row in 0..<numRows {
+            for col in 0..<numColumns {
+                if game[row][col].isMine && !game[row][col].isMarked {
+                    return
+                }
+                
+                if !game[row][col].isMine && !game[row][col].isShown {
+                    return
+                }
+            }
+        }
+        
+        gameState = .win
+        self.navigationItem.title = "😍"
+    }
+    
     func endGame() {
         for row in 0..<numRows {
             for col in 0..<numColumns {
@@ -191,7 +215,7 @@ class GridCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     @IBAction func newGamePressed(_ sender: Any) {
-        gameEnded = false
+        gameState = .inProgress
         game = [[Tile]]()
         setupGame()
         collectionView.reloadData()
@@ -216,6 +240,8 @@ class GridCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     func setupGame() {
+        self.navigationItem.title = "🤔"
+        
         for _ in 0..<numRows {
             var row = [Tile]()
             

@@ -59,7 +59,7 @@
                             <outlet property="delegate" destination="lsx-ZL-SuX" id="4Am-PI-5N3"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="j1c-oF-cm1">
+                    <navigationItem key="navigationItem" title="🤔" id="j1c-oF-cm1" userLabel="Game Indicator">
                         <barButtonItem key="backBarButtonItem" title="Settings" id="fUa-qg-5zs"/>
                         <rightBarButtonItems>
                             <barButtonItem id="7vC-gb-XKk"/>
