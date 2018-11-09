@@ -13,7 +13,7 @@ class Tile {
     var isMarked: Bool
     var isMine: Bool
     var surroundingMinesCount: Int
-    
+
     init(isMine: Bool, surroundingMinesCount: Int) {
         self.isShown = false
         self.isMarked = false

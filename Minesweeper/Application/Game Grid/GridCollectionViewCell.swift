@@ -10,27 +10,27 @@ import UIKit
 
 class GridCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var gridCellLabel: UILabel!
-    
+
     func displayHidden() {
         self.backgroundColor = .lightGray
         self.gridCellLabel.text = ""
     }
-    
+
     func displayNumber(surroundingMines: Int) {
         self.backgroundColor = .white
-        
+
         if surroundingMines == 0 {
             self.gridCellLabel.text = ""
         } else {
             self.gridCellLabel.text = "\(surroundingMines)"
         }
     }
-    
+
     func displayMarked() {
         self.backgroundColor = .lightGray
         self.gridCellLabel.text = "🍆"
     }
-    
+
     func displayMine() {
         self.backgroundColor = .black
         self.gridCellLabel.text = "🔥"

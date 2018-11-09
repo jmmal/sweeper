@@ -11,9 +11,9 @@ import UIKit
 
 extension CALayer {
     func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
-        
+
         let border = CALayer()
-        
+
         switch edge {
         case .top:
             border.frame = CGRect(x: 0, y: 0, width: frame.width, height: thickness)
@@ -26,9 +26,9 @@ extension CALayer {
         default:
             break
         }
-        
-        border.backgroundColor = color.cgColor;
-        
+
+        border.backgroundColor = color.cgColor
+
         addSublayer(border)
     }
 }
