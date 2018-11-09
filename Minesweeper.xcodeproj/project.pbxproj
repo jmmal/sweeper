@@ -16,6 +16,7 @@
 		03595FDE2191A12400D706D5 /* GridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDD2191A12400D706D5 /* GridCollectionViewCell.swift */; };
 		03595FE02192FCC700D706D5 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDF2192FCC600D706D5 /* Tile.swift */; };
 		03595FE22195199E00D706D5 /* CALayer+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FE12195199E00D706D5 /* CALayer+Border.swift */; };
+		03595FEF21956F7B00D706D5 /* UIButton+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		03595FDD2191A12400D706D5 /* GridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCell.swift; sourceTree = "<group>"; };
 		03595FDF2192FCC600D706D5 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		03595FE12195199E00D706D5 /* CALayer+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Border.swift"; sourceTree = "<group>"; };
+		03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+CornerRadius.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,11 +64,11 @@
 		03595FC62191754400D706D5 /* Minesweeper */ = {
 			isa = PBXGroup;
 			children = (
-				03595FEA21951BCA00D706D5 /* Storyboards */,
-				03595FE921951B5900D706D5 /* Assets */,
 				03595FE521951AEC00D706D5 /* Application */,
-				03595FE421951A3300D706D5 /* Models */,
+				03595FE921951B5900D706D5 /* Assets */,
 				03595FE3219519C300D706D5 /* Extensions */,
+				03595FE421951A3300D706D5 /* Models */,
+				03595FEA21951BCA00D706D5 /* Storyboards */,
 				03595FD32191754600D706D5 /* Info.plist */,
 			);
 			path = Minesweeper;
@@ -75,6 +77,7 @@
 		03595FE3219519C300D706D5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */,
 				03595FE12195199E00D706D5 /* CALayer+Border.swift */,
 			);
 			path = Extensions;
@@ -232,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03595FEF21956F7B00D706D5 /* UIButton+CornerRadius.swift in Sources */,
 				03595FDE2191A12400D706D5 /* GridCollectionViewCell.swift in Sources */,
 				03595FE22195199E00D706D5 /* CALayer+Border.swift in Sources */,
 				03595FDA2191760800D706D5 /* GridCollectionViewController.swift in Sources */,

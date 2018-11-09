@@ -16,10 +16,10 @@ enum GameState {
     case win
 }
 
-class GridCollectionViewController: UICollectionViewController,
-        UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
+class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var gameStateButton: UIButton!
 
     // MARK: - Properties
     var numRows: Int = 0
@@ -33,12 +33,13 @@ class GridCollectionViewController: UICollectionViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+
         // Setup CollectionViewFlowLayout to ensure there is no cell wrapping
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         flowLayout.scrollDirection = UICollectionView.ScrollDirection.horizontal
         flowLayout.minimumInteritemSpacing = 0.0
-        self.collectionView.collectionViewLayout = flowLayout
 
         // Setup long press gesture on cells
         let lpgr: UILongPressGestureRecognizer = UILongPressGestureRecognizer(
@@ -47,101 +48,18 @@ class GridCollectionViewController: UICollectionViewController,
         lpgr.minimumPressDuration = 0.5
         lpgr.delegate = self
         lpgr.delaysTouchesBegan = true
+        lpgr.allowableMovement = CGFloat(2)
         self.collectionView?.addGestureRecognizer(lpgr)
 
         // Prevent accidental swiping back and cancelling game
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.collectionViewLayout = flowLayout
+
         setupGame()
         print("complete..")
-    }
-
-    // MARK: UICollectionViewDataSource
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return numColumns
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numRows
-    }
-
-    // Updates the cell at the specified indexPath
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let row = indexPath.row
-        let col = indexPath.section
-
-        if gameState == .fail || gameState == .win {
-            return
-        }
-
-        if game[row][col].isMine {
-            gameState = .fail
-            self.navigationItem.title = "😤"
-            endGame()
-            return
-        }
-
-        // No action if tile already shown
-        if game[row][col].isShown {
-            return
-        }
-
-        // Marking/Unmarking handle by long tap in handleLongPress
-        if game[row][col].isMarked {
-            return
-        }
-
-        // If the cell has not be previously revealed
-        if game[row][col].surroundingMinesCount == 0 && !game[row][col].isMine {
-            selectSurroundingCells(row, col)
-            game[row][col].isShown = true
-
-            collectionView.reloadData()
-            return
-        }
-
-        game[row][col].isShown = true
-        checkGameState()
-
-        collectionView.reloadItems(at: [indexPath])
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(
-            width: collectionView.bounds.size.height/CGFloat(numRows + 1) - 2,
-            height: collectionView.bounds.size.height/CGFloat(numRows + 1) - 2
-        )
-    }
-
-    override func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-
-        if let gridCell = cell as? GridCollectionViewCell {
-            let row = indexPath.row
-            let col = indexPath.section
-
-            // Configure the cell
-            if game[row][col].isMarked {
-                gridCell.displayMarked()
-            } else if game[row][col].isShown {
-                if game[row][col].isMine {
-                    gridCell.displayMine()
-                } else {
-                    gridCell.displayNumber(surroundingMines: game[row][col].surroundingMinesCount)
-                }
-            } else {
-                gridCell.displayHidden()
-            }
-
-            return gridCell
-        } else {
-            return cell
-        }
     }
 
     func selectSurroundingCells(_ row: Int, _ col: Int) {
@@ -212,7 +130,7 @@ class GridCollectionViewController: UICollectionViewController,
         }
 
         gameState = .win
-        self.navigationItem.title = "😍"
+        gameStateButton.titleLabel?.text = "😍"
     }
 
     func endGame() {
@@ -223,6 +141,10 @@ class GridCollectionViewController: UICollectionViewController,
         }
 
         collectionView.reloadData()
+    }
+
+    @IBAction func settingButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func newGamePressed(_ sender: Any) {
@@ -236,26 +158,27 @@ class GridCollectionViewController: UICollectionViewController,
         if gameState == .win || gameState == .fail {
             return
         }
-        
+
         if sender.state != UIGestureRecognizer.State.began {
             return
         }
 
-        let touchLocation = sender.location(in: self.collectionView)
+        let touchLocation = sender.location(in: collectionView)
 
-        if let indexPath: IndexPath = (self.collectionView?.indexPathForItem(at: touchLocation))! {
+        if let indexPath: IndexPath = (collectionView.indexPathForItem(at: touchLocation)) {
             let row = indexPath.row
             let col = indexPath.section
 
             if !game[row][col].isShown {
                 game[row][col].isMarked = !game[row][col].isMarked
                 collectionView.reloadItems(at: [indexPath])
+                checkGameState()
             }
         }
     }
 
     func setupGame() {
-        self.navigationItem.title = "🤔"
+        gameStateButton.titleLabel?.text = "🤔"
 
         for _ in 0..<numRows {
             var row = [Tile]()
@@ -343,5 +266,95 @@ class GridCollectionViewController: UICollectionViewController,
                 game[row][col].surroundingMinesCount = count
             }
         }
+    }
+}
+
+extension GridCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    // Updates the cell at the specified indexPath
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let row = indexPath.row
+        let col = indexPath.section
+
+        if gameState == .fail || gameState == .win {
+            return
+        }
+
+        if game[row][col].isMine {
+            gameState = .fail
+            gameStateButton.titleLabel?.text = "😤"
+            endGame()
+            return
+        }
+
+        // No action if tile already shown
+        if game[row][col].isShown {
+            return
+        }
+
+        // Marking/Unmarking handle by long tap in handleLongPress
+        if game[row][col].isMarked {
+            return
+        }
+
+        // If the cell has not be previously revealed
+        if game[row][col].surroundingMinesCount == 0 && !game[row][col].isMine {
+            selectSurroundingCells(row, col)
+            game[row][col].isShown = true
+
+            collectionView.reloadData()
+            return
+        }
+
+        game[row][col].isShown = true
+        checkGameState()
+
+        collectionView.reloadItems(at: [indexPath])
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(
+            width: collectionView.frame.height/CGFloat(numRows + 1),
+            height: collectionView.frame.height/CGFloat(numRows + 1)
+        )
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+
+        if let gridCell = cell as? GridCollectionViewCell {
+            let row = indexPath.row
+            let col = indexPath.section
+
+            // Configure the cell
+            if game[row][col].isMarked {
+                gridCell.displayMarked()
+            } else if game[row][col].isShown {
+                if game[row][col].isMine {
+                    gridCell.displayMine()
+                } else {
+                    gridCell.displayNumber(surroundingMines: game[row][col].surroundingMinesCount)
+                }
+            } else {
+                gridCell.displayHidden()
+            }
+
+            return gridCell
+        } else {
+            return cell
+        }
+    }
+
+    // MARK: UICollectionViewDataSource
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return numColumns
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return numRows
     }
 }
