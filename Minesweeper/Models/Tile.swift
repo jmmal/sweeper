@@ -16,6 +16,7 @@ enum TileDisplayState {
 }
 
 class Tile {
+    // MARK: - Tile Characteristics
     var isShown: Bool
     var isMarked: Bool
     var isMine: Bool
@@ -23,6 +24,7 @@ class Tile {
     var rowNum: Int
     var colNum: Int
 
+    // MARK: - Initialiser
     init(isMine: Bool, surroundingMinesCount: Int, row: Int, col: Int) {
         self.isShown = false
         self.isMarked = false
@@ -32,7 +34,9 @@ class Tile {
         self.colNum = col
     }
 
-    func displayState() -> TileDisplayState {
+    // MARK: - Other
+    // Returns the current state the tile should be displayed as
+    func currentDisplayState() -> TileDisplayState {
         if isMarked {
             return .marked
         }

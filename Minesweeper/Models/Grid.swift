@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Used to maintain the current state of the Minesweeper grid.
 enum GridState {
     case won
     case lost
@@ -16,22 +17,22 @@ enum GridState {
 }
 
 class Grid {
+    // MARK: - Grid Characteristics
     let numRows: Int
     let numCols: Int
     let numMines: Int
-
-    var minesRemaining: Int = 0
-
-    var grid = [[Tile]]()
-
     var state: GridState?
+    var minesRemaining: Int = 0
+    private var grid = [[Tile]]()
 
+    // MARK: - Initialiser
     init(rows: Int, columns: Int, mines: Int) {
         numRows = rows
         numCols = columns
         numMines = mines
     }
 
+    // MARK: - Grid Setup Methods
     // Randomises the placement of mines on the board and setuo tile counts
     func newGame() {
         state = .notStarted
@@ -64,8 +65,8 @@ class Grid {
             let randCol = Int.random(in: 0..<numCols)
 
             // Check cell not already a mine
-            if !isMineAt(randRow, randCol) {
-                setMineAt(randRow, randCol)
+            if !tileAt(randRow, randCol).isMine {
+                tileAt(randRow, randCol).isMine = true
                 minesLeftToPlace -= 1
             }
         }
@@ -87,15 +88,7 @@ class Grid {
         }
     }
 
-    // Stops the game. Sets all mines to be displayed
-    func showAllMines() {
-        for row in 0..<numRows {
-            for col in 0..<numCols where grid[row][col].isMine {
-                grid[row][col].isShown = true
-            }
-        }
-    }
-
+    // MARK: - Game State Methods
     func gameWon() -> Bool {
         if state == .notStarted {
             return false
@@ -103,11 +96,13 @@ class Grid {
 
         for row in 0..<numRows {
             for col in 0..<numCols {
-                if isMineAt(row, col) && !isMarkedAt(row, col) {
+                let tile = tileAt(row, col
+                )
+                if tile.isMine && !tile.isMarked {
                     return false
                 }
 
-                if !isMineAt(row, col) && !isShownAt(row, col) {
+                if !tile.isMine && !tile.isShown {
                     return false
                 }
             }
@@ -120,6 +115,7 @@ class Grid {
         return state
     }
 
+    // MARK: - Grid Methods, i.e. Setters/Getters
     func selectTileAt(_ indexPath: IndexPath) {
         if state == .notStarted {
             state = .inProgress
@@ -152,33 +148,7 @@ class Grid {
         }
     }
 
-    //
-    func tileAt(_ row: Int, _ col: Int) -> Tile {
-        return grid[row][col]
-    }
-
-    func tileAt(indexPath: IndexPath) -> Tile {
-        return grid[indexPath.row][indexPath.section]
-    }
-
-    //
-    func mineCountAt(_ row: Int, _ col: Int) -> Int {
-        return grid[row][col].surroundingMinesCount
-    }
-
-    func isMineAt(_ row: Int, _ col: Int) -> Bool {
-        return grid[row][col].isMine
-    }
-
-    func isMarkedAt(_ row: Int, _ col: Int) -> Bool {
-        return grid[row][col].isMarked
-    }
-
-    func isShownAt(_ row: Int, _ col: Int) -> Bool {
-        return grid[row][col].isShown
-    }
-
-    func setShownAt(_ row: Int, _ col: Int) {
+    private func setShownAt(_ row: Int, _ col: Int) {
         grid[row][col].isShown = true
 
         if grid[row][col].isMine {
@@ -187,16 +157,21 @@ class Grid {
         }
     }
 
-    func setMarkedAt(_ row: Int, _ col: Int) {
-        grid[row][col].isMarked = true
+    func tileAt(_ row: Int, _ col: Int) -> Tile {
+        return grid[row][col]
     }
 
-    func unmarkAt(_ row: Int, _ col: Int) {
-        grid[row][col].isMarked = false
+    func tileAt(indexPath: IndexPath) -> Tile {
+        return grid[indexPath.row][indexPath.section]
     }
 
-    private func setMineAt(_ row: Int, _ col: Int) {
-        grid[row][col].isMine = true
+    // Stops the game. Sets all mines to be displayed
+    private func showAllMines() {
+        for row in 0..<numRows {
+            for col in 0..<numCols where grid[row][col].isMine {
+                grid[row][col].isShown = true
+            }
+        }
     }
 
     private func getAdjacentTiles(_ row: Int, _ col: Int) -> [Tile] {
@@ -247,14 +222,14 @@ class Grid {
         return adjacents
     }
 
-    func selectSurroundingCells(_ row: Int, _ col: Int) {
+    private func selectSurroundingCells(_ row: Int, _ col: Int) {
         if tileAt(row, col).isShown {
             return
         }
 
         tileAt(row, col).isShown = true
 
-        if mineCountAt(row, col) != 0 {
+        if tileAt(row, col).surroundingMinesCount != 0 {
             return
         }
 

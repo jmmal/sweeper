@@ -38,6 +38,23 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
         setupGame()
     }
 
+    // MARK: - Game Initialisers
+    @IBAction func settingButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func newGamePressed(_ sender: Any) {
+        game.reset()
+        updateMinesMarkedCount()
+        collectionView.reloadData()
+    }
+
+    func setupGame() {
+        game.setup()
+        updateMinesMarkedCount()
+    }
+
+    // MARK: - View Updaters
     func gameSecondsCountDidUpdate(game: Game, withTotalSeconds: Int) {
         totalSecondsLabel.text = "\(withTotalSeconds)"
     }
@@ -61,16 +78,7 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
         }
     }
 
-    @IBAction func settingButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-
-    @IBAction func newGamePressed(_ sender: Any) {
-        game.reset()
-        updateMinesMarkedCount()
-        collectionView.reloadData()
-    }
-
+    // MARK: - Gesture Handlers
     @IBAction func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         if sender.state != UIGestureRecognizer.State.began {
             return
@@ -85,13 +93,9 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
             collectionView.reloadItems(at: [indexPath])
         }
     }
-
-    func setupGame() {
-        game.setup()
-        updateMinesMarkedCount()
-    }
 }
 
+// MARK: - CollectionView Delegate and Datasource extensions
 extension GridCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
     // Updates the cell at the specified indexPath
@@ -119,7 +123,7 @@ UICollectionViewDelegateFlowLayout {
         if let gridCell = cell as? GridCollectionViewCell {
             let tile = game.getTileForCellAt(indexPath: indexPath)
 
-            switch tile.displayState() {
+            switch tile.currentDisplayState() {
             case .marked:
                 gridCell.displayMarked()
             case .hidden:

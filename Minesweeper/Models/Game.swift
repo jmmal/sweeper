@@ -14,6 +14,7 @@ protocol GameControllerDelegate: class {
 }
 
 class Game {
+    // MARK: - Properties
     weak var delegate: GameControllerDelegate?
 
     var timer: Timer?
@@ -22,9 +23,9 @@ class Game {
     let numRows: Int
     let numColumns: Int
     let numMines: Int
-
     var secondsCount: Int = 0
 
+    // MARK: - Initialisers
     init(rows: Int, columns: Int, mines: Int) {
         numRows = rows
         numColumns = columns
@@ -40,7 +41,12 @@ class Game {
         self.delegate?.gameStateDidUpdate(game: self, withState: .notStarted)
     }
 
-    func stopGame() {
+    func reset() {
+        stopTimer()
+        setup()
+    }
+
+    private func stopGame() {
         stopTimer()
     }
 
@@ -48,18 +54,14 @@ class Game {
         timer?.invalidate()
     }
 
-    func startTimer() {
+    private func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
             self.secondsCount += 1
             self.delegate?.gameSecondsCountDidUpdate(game: self, withTotalSeconds: self.secondsCount)
         })
     }
 
-    func reset() {
-        stopTimer()
-        setup()
-    }
-
+    // MARK: - Grid Actions
     func selectTileAt(_ indexPath: IndexPath) {
         if grid.getState() == .lost {
             return
@@ -83,6 +85,15 @@ class Game {
         checkGameState()
     }
 
+    func getRemainingMines() -> Int {
+        return grid.minesRemaining
+    }
+
+    func getTileForCellAt(indexPath: IndexPath) -> Tile {
+        return grid.tileAt(indexPath: indexPath)
+    }
+
+    // MARK: - GameState
     func checkGameState() {
         if grid.getState() == .lost {
             stopGame()
@@ -94,13 +105,5 @@ class Game {
             stopGame()
             self.delegate?.gameStateDidUpdate(game: self, withState: .won)
         }
-    }
-
-    func getRemainingMines() -> Int {
-        return grid.minesRemaining
-    }
-
-    func getTileForCellAt(indexPath: IndexPath) -> Tile {
-        return grid.tileAt(indexPath: indexPath)
     }
 }

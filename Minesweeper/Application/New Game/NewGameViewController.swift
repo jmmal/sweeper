@@ -24,6 +24,7 @@ class NewGameViewController: UIViewController {
     var numColumns: Int = 9
     var numMines: Int = 10
 
+    // MARK: - Lifecycle Hooks
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +36,7 @@ class NewGameViewController: UIViewController {
         updateView()
     }
 
+    // MARK: - View Updates
     func updateView() {
         rowCountSlider.value = Float(numRows)
         columnCountSlider.value = Float(numColumns)
