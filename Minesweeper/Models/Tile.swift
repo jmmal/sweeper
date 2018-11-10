@@ -20,12 +20,16 @@ class Tile {
     var isMarked: Bool
     var isMine: Bool
     var surroundingMinesCount: Int
+    var rowNum: Int
+    var colNum: Int
 
-    init(isMine: Bool, surroundingMinesCount: Int) {
+    init(isMine: Bool, surroundingMinesCount: Int, row: Int, col: Int) {
         self.isShown = false
         self.isMarked = false
         self.isMine = isMine
         self.surroundingMinesCount = surroundingMinesCount
+        self.rowNum = row
+        self.colNum = col
     }
 
     func displayState() -> TileDisplayState {

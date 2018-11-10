@@ -22,15 +22,15 @@
                                 <rect key="frame" x="0.0" y="69" width="375" height="598"/>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="4" id="jVd-75-uby">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="jVd-75-uby">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="4" minY="4" maxX="4" maxY="4"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SweeperCell" id="a1r-dr-1Eb" customClass="GridCollectionViewCell" customModule="Minesweeper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="4" y="4" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -139,6 +139,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="074-tf-ptE" firstAttribute="trailing" secondItem="ZkQ-5q-c3M" secondAttribute="trailing" id="1Xo-HC-eYz"/>
                             <constraint firstItem="zKE-mW-FLC" firstAttribute="trailing" secondItem="ZkQ-5q-c3M" secondAttribute="trailing" id="390-z8-fkk"/>
@@ -158,22 +159,31 @@
                             <constraint firstItem="074-tf-ptE" firstAttribute="leading" secondItem="ZkQ-5q-c3M" secondAttribute="leading" id="ucM-EJ-kEY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZkQ-5q-c3M"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="yFJ-QK-CBY" appends="YES" id="vdx-KA-uTP"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="074-tf-ptE" id="4x3-ON-Zpg"/>
                         <outlet property="gameStateButton" destination="ouV-cW-rNS" id="Gm6-kJ-GWR"/>
+                        <outlet property="longPressGesture" destination="yFJ-QK-CBY" id="Bbf-Z6-JTM"/>
                         <outlet property="minesRemainingLabel" destination="uZy-nO-9yG" id="72v-LB-NVg"/>
                         <outlet property="totalSecondsLabel" destination="ZaP-fv-eQ6" id="fuJ-NW-d5g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fa7-uV-TBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer delaysTouchesBegan="YES" delaysTouchesEnded="NO" allowableMovement="5" minimumPressDuration="0.5" id="yFJ-QK-CBY">
+                    <connections>
+                        <action selector="handleLongPress:" destination="dLh-oK-lj9" id="HtN-Kc-J22"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2268" y="45.42728635682159"/>
         </scene>
-        <!--Settings-->
+        <!--New Game View Controller-->
         <scene sceneID="Bco-XP-q8d">
             <objects>
-                <viewController id="S5W-Xd-ogG" customClass="NewGameViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="S5W-Xd-ogG" userLabel="New Game View Controller" customClass="NewGameViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4h1-aN-BKZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -421,10 +431,10 @@
             </objects>
             <point key="canvasLocation" x="1330.4347826086957" y="45.652173913043484"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Root Navigation Controller-->
         <scene sceneID="RbJ-nh-16r">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L5y-Ez-T8x" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L5y-Ez-T8x" userLabel="Root Navigation Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qsu-eY-jJc">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

@@ -45,11 +45,11 @@ class Grid {
     // Initialises the board size
     private func buildGrid() {
         grid = [[Tile]]()
-        for _ in 0..<numRows {
+        for rowIndex in 0..<numRows {
             var row = [Tile]()
 
-            for _ in 0..<numCols {
-                row.append(Tile(isMine: false, surroundingMinesCount: 0))
+            for colIndex in 0..<numCols {
+                row.append(Tile(isMine: false, surroundingMinesCount: 0, row: rowIndex, col: colIndex))
             }
 
             grid.append(row)
@@ -76,50 +76,10 @@ class Grid {
             for col in 0..<numCols {
                 var count: Int = 0
 
-                // Check Top
-                if row > 0 {
-                    // TopLeft
-                    if col > 0 && grid[row - 1][col - 1].isMine {
-                        count += 1
-                    }
+                let adjacentTiles = getAdjacentTiles(row, col)
 
-                    // TopTop
-                    if grid[row - 1][col].isMine {
-                        count += 1
-                    }
-
-                    // TopRight
-                    if col + 1 < numCols && grid[row - 1][col + 1].isMine {
-                        count += 1
-                    }
-                }
-
-                // Check Left
-                if col > 0 && grid[row][col - 1].isMine {
+                for tile in adjacentTiles where tile.isMine {
                     count += 1
-                }
-
-                // Check Right
-                if col + 1 < numCols && grid[row][col + 1].isMine {
-                    count += 1
-                }
-
-                // Check Down
-                if row + 1 < numRows {
-                    // Bottom Left
-                    if col > 0 && grid[row + 1][col - 1].isMine {
-                        count += 1
-                    }
-
-                    // Bottom Bottom
-                    if grid[row + 1][col].isMine {
-                        count += 1
-                    }
-
-                    // Bottom Right
-                    if col + 1 < numCols && grid[row + 1][col + 1].isMine {
-                        count += 1
-                    }
                 }
 
                 grid[row][col].surroundingMinesCount = count
@@ -239,6 +199,54 @@ class Grid {
         grid[row][col].isMine = true
     }
 
+    private func getAdjacentTiles(_ row: Int, _ col: Int) -> [Tile] {
+        var adjacents = [Tile]()
+
+        // Check Top
+        if row > 0 {
+            // TopLeft
+            if col > 0 {
+                adjacents.append(tileAt(row - 1, col - 1))
+            }
+
+            // TopTop
+            adjacents.append(tileAt(row - 1, col))
+
+            // TopRight
+            if col + 1 < numCols {
+                adjacents.append(tileAt(row - 1, col + 1))
+            }
+        }
+
+        // Check Left
+        if col > 0 {
+            adjacents.append(tileAt(row, col - 1))
+        }
+
+        // Check Right
+        if col + 1 < numCols {
+            adjacents.append(tileAt(row, col + 1))
+        }
+
+        // Check Down
+        if row + 1 < numRows {
+            // Bottom Left
+            if col > 0 {
+                adjacents.append(tileAt(row + 1, col - 1))
+            }
+
+            // Bottom Bottom
+            adjacents.append(tileAt(row + 1, col))
+
+            // Bottom Right
+            if col + 1 < numCols {
+                adjacents.append(tileAt(row + 1, col + 1))
+            }
+        }
+
+        return adjacents
+    }
+
     func selectSurroundingCells(_ row: Int, _ col: Int) {
         if tileAt(row, col).isShown {
             return
@@ -250,46 +258,10 @@ class Grid {
             return
         }
 
-        // Check Top
-        if row > 0 {
-            // TopLeft
-            if col > 0 {
-                selectSurroundingCells(row - 1, col - 1)
-            }
+        let adjacentTiles = getAdjacentTiles(row, col)
 
-            // TopTop
-            selectSurroundingCells(row - 1, col)
-
-            // TopRight
-            if col + 1 < numCols {
-                selectSurroundingCells(row - 1, col + 1)
-            }
-        }
-
-        // Check Left
-        if col > 0 {
-            selectSurroundingCells(row, col - 1)
-        }
-
-        // Check Right
-        if col + 1 < numCols {
-            selectSurroundingCells(row, col + 1)
-        }
-
-        // Check Down
-        if row + 1 < numRows {
-            // Bottom Left
-            if col > 0 {
-                selectSurroundingCells(row + 1, col - 1)
-            }
-
-            // Bottom Bottom
-            selectSurroundingCells(row + 1, col)
-
-            // Bottom Right
-            if col + 1 < numCols {
-                selectSurroundingCells(row + 1, col + 1)
-            }
+        for tile in adjacentTiles {
+            selectSurroundingCells(tile.rowNum, tile.colNum)
         }
     }
 }

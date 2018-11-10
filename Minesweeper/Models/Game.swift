@@ -17,7 +17,7 @@ class Game {
     weak var delegate: GameControllerDelegate?
 
     var timer: Timer?
-    let grid: Grid?
+    let grid: Grid
 
     let numRows: Int
     let numColumns: Int
@@ -33,7 +33,7 @@ class Game {
     }
 
     func setup() {
-        grid?.newGame()
+        grid.newGame()
 
         secondsCount = 0
         self.delegate?.gameSecondsCountDidUpdate(game: self, withTotalSeconds: self.secondsCount)
@@ -60,45 +60,45 @@ class Game {
     }
 
     func selectTileAt(_ indexPath: IndexPath) {
-        if grid?.getState() == .lost {
+        if grid.getState() == .lost {
             return
         }
 
-        if grid?.getState() == .notStarted {
+        if grid.getState() == .notStarted {
             startTimer()
         }
 
-        grid?.selectTileAt(indexPath)
+        grid.selectTileAt(indexPath)
         checkGameState()
     }
 
     func markTileAt(_ indexPath: IndexPath) {
-        if grid?.getState() == .lost {
+        if grid.getState() == .lost {
             return
         }
 
-        grid?.markTileAt(indexPath)
+        grid.markTileAt(indexPath)
         checkGameState()
     }
 
     func checkGameState() {
-        if grid?.getState() == .lost {
+        if grid.getState() == .lost {
             stopGame()
             self.delegate?.gameStateDidUpdate(game: self, withState: .lost)
             return
         }
 
-        if grid?.gameWon() == true {
+        if grid.gameWon() == true {
             stopGame()
             self.delegate?.gameStateDidUpdate(game: self, withState: .won)
         }
     }
 
     func getRemainingMines() -> Int {
-        return grid?.minesRemaining ?? 0
+        return grid.minesRemaining
     }
 
-    func getTileForCellAt(indexPath: IndexPath) -> Tile? {
-        return grid?.tileAt(indexPath: indexPath)
+    func getTileForCellAt(indexPath: IndexPath) -> Tile {
+        return grid.tileAt(indexPath: indexPath)
     }
 }

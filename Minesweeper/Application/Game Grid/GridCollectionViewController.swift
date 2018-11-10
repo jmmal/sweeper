@@ -15,36 +15,25 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
     @IBOutlet weak var gameStateButton: UIButton!
     @IBOutlet weak var totalSecondsLabel: UILabel!
     @IBOutlet weak var minesRemainingLabel: UILabel!
+    @IBOutlet var longPressGesture: UILongPressGestureRecognizer!
 
     // MARK: - Properties
-    var game: Game?
+    var game: Game!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Setup CollectionViewFlowLayout to ensure there is no cell wrapping
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
-        flowLayout.scrollDirection = UICollectionView.ScrollDirection.horizontal
-        flowLayout.minimumInteritemSpacing = 0.0
-
-        // Setup long press gesture on cells
-        let lpgr: UILongPressGestureRecognizer = UILongPressGestureRecognizer(
-            target: self,
-            action: #selector(GridCollectionViewController.handleLongPress(_:)))
-        lpgr.minimumPressDuration = 0.5
-        lpgr.delegate = self
-        lpgr.delaysTouchesBegan = true
-        lpgr.allowableMovement = CGFloat(2)
-        self.collectionView?.addGestureRecognizer(lpgr)
+        guard game != nil else {
+            dismiss(animated: true, completion: nil)
+            return
+        }
 
         // Prevent accidental swiping back and cancelling game
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.collectionViewLayout = flowLayout
-        game?.delegate = self
+        game.delegate = self
 
         setupGame()
     }
@@ -54,14 +43,10 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
     }
 
     func updateMinesMarkedCount() {
-        if let mineCount = game?.getRemainingMines() {
-            minesRemainingLabel.text = "\(mineCount)"
-        }
+        minesRemainingLabel.text = "\(game.getRemainingMines())"
     }
 
     func gameStateDidUpdate(game: Game, withState state: GridState) {
-        print("gameStateUpdatred")
-
         switch state {
         case .won:
             gameStateButton.titleLabel?.text = "😍"
@@ -80,7 +65,7 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
     }
 
     @IBAction func newGamePressed(_ sender: Any) {
-        game?.reset()
+        game.reset()
         updateMinesMarkedCount()
         collectionView.reloadData()
     }
@@ -93,7 +78,7 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
         let touchLocation = sender.location(in: collectionView)
 
         if let indexPath: IndexPath = (collectionView.indexPathForItem(at: touchLocation)) {
-            game?.markTileAt(indexPath)
+            game.markTileAt(indexPath)
 
             updateMinesMarkedCount()
             collectionView.reloadItems(at: [indexPath])
@@ -101,7 +86,7 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
     }
 
     func setupGame() {
-        game?.setup()
+        game.setup()
 
         gameStateButton.titleLabel?.text = "🤔"
         updateMinesMarkedCount()
@@ -112,7 +97,7 @@ extension GridCollectionViewController: UICollectionViewDelegate, UICollectionVi
 UICollectionViewDelegateFlowLayout {
     // Updates the cell at the specified indexPath
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        game?.selectTileAt(indexPath)
+        game.selectTileAt(indexPath)
 
         collectionView.reloadData()
     }
@@ -121,14 +106,10 @@ UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if let currentGame = game {
-            return CGSize(
-                width: collectionView.frame.height/CGFloat(currentGame.numRows + 1),
-                height: collectionView.frame.height/CGFloat(currentGame.numRows + 1)
-            )
-        }
-
-        return CGSize(width: 20, height: 20)
+        return CGSize(
+            width: collectionView.frame.height/CGFloat(game.numRows + 1),
+            height: collectionView.frame.height/CGFloat(game.numRows + 1)
+        )
     }
 
     func collectionView(
@@ -137,20 +118,20 @@ UICollectionViewDelegateFlowLayout {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
 
         if let gridCell = cell as? GridCollectionViewCell {
-            if let tile = game?.getTileForCellAt(indexPath: indexPath) {
-                switch tile.displayState() {
-                case .marked:
-                    gridCell.displayMarked()
-                case .hidden:
-                    gridCell.displayHidden()
-                case .mine:
-                    gridCell.displayMine()
-                case .number:
-                    gridCell.displayNumber(surroundingMines: tile.surroundingMinesCount)
-                }
+            let tile = game.getTileForCellAt(indexPath: indexPath)
 
-                return gridCell
+            switch tile.displayState() {
+            case .marked:
+                gridCell.displayMarked()
+            case .hidden:
+                gridCell.displayHidden()
+            case .mine:
+                gridCell.displayMine()
+            case .number:
+                gridCell.displayNumber(surroundingMines: tile.surroundingMinesCount)
             }
+
+            return gridCell
         }
 
         return cell
@@ -158,10 +139,10 @@ UICollectionViewDelegateFlowLayout {
 
     // MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return game?.numColumns ?? 0
+        return game.numColumns
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return game?.numRows ?? 0
+        return game.numRows
     }
 }
