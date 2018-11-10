@@ -47,6 +47,7 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
     }
 
     func gameStateDidUpdate(game: Game, withState state: GridState) {
+        print(state)
         switch state {
         case .won:
             gameStateButton.titleLabel?.text = "😍"
@@ -56,7 +57,7 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
         case .inProgress:
             gameStateButton.titleLabel?.text = "🤔"
         case .notStarted:
-            gameStateButton.titleLabel?.text = "👀"
+            gameStateButton.titleLabel?.text = "🤔"
         }
     }
 
@@ -87,8 +88,6 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
 
     func setupGame() {
         game.setup()
-
-        gameStateButton.titleLabel?.text = "🤔"
         updateMinesMarkedCount()
     }
 }

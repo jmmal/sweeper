@@ -37,6 +37,7 @@ class Game {
 
         secondsCount = 0
         self.delegate?.gameSecondsCountDidUpdate(game: self, withTotalSeconds: self.secondsCount)
+        self.delegate?.gameStateDidUpdate(game: self, withState: .notStarted)
     }
 
     func stopGame() {
@@ -66,6 +67,7 @@ class Game {
 
         if grid.getState() == .notStarted {
             startTimer()
+            self.delegate?.gameStateDidUpdate(game: self, withState: .inProgress)
         }
 
         grid.selectTileAt(indexPath)
