@@ -20,7 +20,19 @@
 		03595FE02192FCC700D706D5 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDF2192FCC600D706D5 /* Tile.swift */; };
 		03595FE22195199E00D706D5 /* CALayer+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FE12195199E00D706D5 /* CALayer+Border.swift */; };
 		03595FEF21956F7B00D706D5 /* UIButton+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */; };
+		03D180EC219716B200775DE9 /* MinesweeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D180EB219716B200775DE9 /* MinesweeperTests.swift */; };
+		03D180F42197181E00775DE9 /* TileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D180F32197181E00775DE9 /* TileTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		03D180EE219716B200775DE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03595FBC2191754400D706D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03595FC32191754400D706D5;
+			remoteInfo = Minesweeper;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0306A0572196766700E91C75 /* UILabel+CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CornerRadius.swift"; sourceTree = "<group>"; };
@@ -38,10 +50,21 @@
 		03595FDF2192FCC600D706D5 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		03595FE12195199E00D706D5 /* CALayer+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Border.swift"; sourceTree = "<group>"; };
 		03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+CornerRadius.swift"; sourceTree = "<group>"; };
+		03D180E9219716B200775DE9 /* MinesweeperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinesweeperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03D180EB219716B200775DE9 /* MinesweeperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperTests.swift; sourceTree = "<group>"; };
+		03D180ED219716B200775DE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03D180F32197181E00775DE9 /* TileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		03595FC12191754400D706D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03D180E6219716B200775DE9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -55,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				03595FC62191754400D706D5 /* Minesweeper */,
+				03D180EA219716B200775DE9 /* MinesweeperTests */,
 				03595FC52191754400D706D5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				03595FC42191754400D706D5 /* Minesweeper.app */,
+				03D180E9219716B200775DE9 /* MinesweeperTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +177,16 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		03D180EA219716B200775DE9 /* MinesweeperTests */ = {
+			isa = PBXGroup;
+			children = (
+				03D180F32197181E00775DE9 /* TileTests.swift */,
+				03D180EB219716B200775DE9 /* MinesweeperTests.swift */,
+				03D180ED219716B200775DE9 /* Info.plist */,
+			);
+			path = MinesweeperTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -173,6 +208,24 @@
 			productReference = 03595FC42191754400D706D5 /* Minesweeper.app */;
 			productType = "com.apple.product-type.application";
 		};
+		03D180E8219716B200775DE9 /* MinesweeperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03D180F2219716B200775DE9 /* Build configuration list for PBXNativeTarget "MinesweeperTests" */;
+			buildPhases = (
+				03D180E5219716B200775DE9 /* Sources */,
+				03D180E6219716B200775DE9 /* Frameworks */,
+				03D180E7219716B200775DE9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03D180EF219716B200775DE9 /* PBXTargetDependency */,
+			);
+			name = MinesweeperTests;
+			productName = MinesweeperTests;
+			productReference = 03D180E9219716B200775DE9 /* MinesweeperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -185,6 +238,10 @@
 				TargetAttributes = {
 					03595FC32191754400D706D5 = {
 						CreatedOnToolsVersion = 10.1;
+					};
+					03D180E8219716B200775DE9 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 03595FC32191754400D706D5;
 					};
 				};
 			};
@@ -202,6 +259,7 @@
 			projectRoot = "";
 			targets = (
 				03595FC32191754400D706D5 /* Minesweeper */,
+				03D180E8219716B200775DE9 /* MinesweeperTests */,
 			);
 		};
 /* End PBXProject section */
@@ -214,6 +272,13 @@
 				03595FD22191754600D706D5 /* LaunchScreen.storyboard in Resources */,
 				03595FCF2191754600D706D5 /* Assets.xcassets in Resources */,
 				03595FCD2191754400D706D5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03D180E7219716B200775DE9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +322,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		03D180E5219716B200775DE9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03D180EC219716B200775DE9 /* MinesweeperTests.swift in Sources */,
+				03D180F42197181E00775DE9 /* TileTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03D180EF219716B200775DE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03595FC32191754400D706D5 /* Minesweeper */;
+			targetProxy = 03D180EE219716B200775DE9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		03595FCB2191754400D706D5 /* Main.storyboard */ = {
@@ -431,6 +513,46 @@
 			};
 			name = Release;
 		};
+		03D180F0219716B200775DE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QDP3V2QYJ5;
+				INFOPLIST_FILE = MinesweeperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshmaloney.MinesweeperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Minesweeper.app/Minesweeper";
+			};
+			name = Debug;
+		};
+		03D180F1219716B200775DE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QDP3V2QYJ5;
+				INFOPLIST_FILE = MinesweeperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshmaloney.MinesweeperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Minesweeper.app/Minesweeper";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -448,6 +570,15 @@
 			buildConfigurations = (
 				03595FD72191754600D706D5 /* Debug */,
 				03595FD82191754600D706D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03D180F2219716B200775DE9 /* Build configuration list for PBXNativeTarget "MinesweeperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03D180F0219716B200775DE9 /* Debug */,
+				03D180F1219716B200775DE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
