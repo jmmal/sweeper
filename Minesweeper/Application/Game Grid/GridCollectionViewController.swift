@@ -10,30 +10,17 @@ import UIKit
 
 private let reuseIdentifier = "SweeperCell"
 
-enum GameState {
-    case inProgress
-    case fail
-    case win
-}
-
-class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegate {
-
+class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegate, GameControllerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var gameStateButton: UIButton!
+    @IBOutlet weak var totalSecondsLabel: UILabel!
+    @IBOutlet weak var minesRemainingLabel: UILabel!
 
     // MARK: - Properties
-    var numRows: Int = 0
-    var numColumns: Int = 0
-    var numMines: Int = 0
-
-    var game = [[Tile]]()
-
-    var gameState: GameState = .inProgress
+    var game: Game?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
 
         // Setup CollectionViewFlowLayout to ensure there is no cell wrapping
         let flowLayout = UICollectionViewFlowLayout()
@@ -57,90 +44,35 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.collectionViewLayout = flowLayout
+        game?.delegate = self
 
         setupGame()
-        print("complete..")
     }
 
-    func selectSurroundingCells(_ row: Int, _ col: Int) {
-        if game[row][col].isShown {
-            return
-        }
+    func gameSecondsCountDidUpdate(game: Game, withTotalSeconds: Int) {
+        totalSecondsLabel.text = "\(withTotalSeconds)"
+    }
 
-        game[row][col].isShown = true
-
-        if game[row][col].surroundingMinesCount != 0 {
-            return
-        }
-
-        // Check Top
-        if row > 0 {
-            // TopLeft
-            if col > 0 {
-                selectSurroundingCells(row - 1, col - 1)
-            }
-
-            // TopTop
-            selectSurroundingCells(row - 1, col)
-
-            // TopRight
-            if col + 1 < numColumns {
-                selectSurroundingCells(row - 1, col + 1)
-            }
-        }
-
-        // Check Left
-        if col > 0 {
-            selectSurroundingCells(row, col - 1)
-        }
-
-        // Check Right
-        if col + 1 < numColumns {
-            selectSurroundingCells(row, col + 1)
-        }
-
-        // Check Down
-        if row + 1 < numRows {
-            // Bottom Left
-            if col > 0 {
-                selectSurroundingCells(row + 1, col - 1)
-            }
-
-            // Bottom Bottom
-                selectSurroundingCells(row + 1, col)
-
-            // Bottom Right
-            if col + 1 < numColumns {
-                selectSurroundingCells(row + 1, col + 1)
-            }
+    func updateMinesMarkedCount() {
+        if let mineCount = game?.getRemainingMines() {
+            minesRemainingLabel.text = "\(mineCount)"
         }
     }
 
-    func checkGameState() {
-        for row in 0..<numRows {
-            for col in 0..<numColumns {
-                if game[row][col].isMine && !game[row][col].isMarked {
-                    return
-                }
+    func gameStateDidUpdate(game: Game, withState state: GridState) {
+        print("gameStateUpdatred")
 
-                if !game[row][col].isMine && !game[row][col].isShown {
-                    return
-                }
-            }
+        switch state {
+        case .won:
+            gameStateButton.titleLabel?.text = "😍"
+        case .lost:
+            gameStateButton.titleLabel?.text = "😤"
+            collectionView.reloadData()
+        case .inProgress:
+            gameStateButton.titleLabel?.text = "🤔"
+        case .notStarted:
+            gameStateButton.titleLabel?.text = "👀"
         }
-
-        gameState = .win
-        gameStateButton.titleLabel?.text = "😍"
-    }
-
-    func endGame() {
-        for row in 0..<numRows {
-            for col in 0..<numColumns where game[row][col].isMine {
-                game[row][col].isShown = true
-            }
-        }
-
-        collectionView.reloadData()
     }
 
     @IBAction func settingButtonPressed(_ sender: Any) {
@@ -148,17 +80,12 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
     }
 
     @IBAction func newGamePressed(_ sender: Any) {
-        gameState = .inProgress
-        game = [[Tile]]()
-        setupGame()
+        game?.reset()
+        updateMinesMarkedCount()
         collectionView.reloadData()
     }
 
     @IBAction func handleLongPress(_ sender: UILongPressGestureRecognizer) {
-        if gameState == .win || gameState == .fail {
-            return
-        }
-
         if sender.state != UIGestureRecognizer.State.began {
             return
         }
@@ -166,159 +93,42 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
         let touchLocation = sender.location(in: collectionView)
 
         if let indexPath: IndexPath = (collectionView.indexPathForItem(at: touchLocation)) {
-            let row = indexPath.row
-            let col = indexPath.section
+            game?.markTileAt(indexPath)
 
-            if !game[row][col].isShown {
-                game[row][col].isMarked = !game[row][col].isMarked
-                collectionView.reloadItems(at: [indexPath])
-                checkGameState()
-            }
+            updateMinesMarkedCount()
+            collectionView.reloadItems(at: [indexPath])
         }
     }
 
     func setupGame() {
+        game?.setup()
+
         gameStateButton.titleLabel?.text = "🤔"
-
-        for _ in 0..<numRows {
-            var row = [Tile]()
-
-            for _ in 0..<numColumns {
-                row.append(Tile(isMine: false, surroundingMinesCount: 0))
-            }
-
-            game.append(row)
-        }
-
-        placeMines()
-        countMines()
-
-        print("setup complete")
-    }
-
-    func placeMines() {
-
-        var minesLeftToPlace = numMines
-
-        while minesLeftToPlace > 0 {
-            let randRow = Int.random(in: 0..<numRows)
-            let randCol = Int.random(in: 0..<numColumns)
-
-            // Check cell not already a mine
-            if !game[randRow][randCol].isMine {
-                game[randRow][randCol].isMine = true
-                minesLeftToPlace -= 1
-            }
-        }
-    }
-
-    func countMines() {
-        for row in 0..<numRows {
-            for col in 0..<numColumns {
-                var count: Int = 0
-
-                // Check Top
-                if row > 0 {
-                    // TopLeft
-                    if col > 0 && game[row - 1][col - 1].isMine {
-                        count += 1
-                    }
-
-                    // TopTop
-                    if game[row - 1][col].isMine {
-                        count += 1
-                    }
-
-                    // TopRight
-                    if col + 1 < numColumns && game[row - 1][col + 1].isMine {
-                        count += 1
-                    }
-                }
-
-                // Check Left
-                if col > 0 && game[row][col - 1].isMine {
-                    count += 1
-                }
-
-                // Check Right
-                if col + 1 < numColumns && game[row][col + 1].isMine {
-                    count += 1
-                }
-
-                // Check Down
-                if row + 1 < numRows {
-                    // Bottom Left
-                    if col > 0 && game[row + 1][col - 1].isMine {
-                        count += 1
-                    }
-
-                    // Bottom Bottom
-                    if game[row + 1][col].isMine {
-                        count += 1
-                    }
-
-                    // Bottom Right
-                    if col + 1 < numColumns && game[row + 1][col + 1].isMine {
-                        count += 1
-                    }
-                }
-
-                game[row][col].surroundingMinesCount = count
-            }
-        }
+        updateMinesMarkedCount()
     }
 }
 
-extension GridCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension GridCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource,
+UICollectionViewDelegateFlowLayout {
     // Updates the cell at the specified indexPath
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let row = indexPath.row
-        let col = indexPath.section
+        game?.selectTileAt(indexPath)
 
-        if gameState == .fail || gameState == .win {
-            return
-        }
-
-        if game[row][col].isMine {
-            gameState = .fail
-            gameStateButton.titleLabel?.text = "😤"
-            endGame()
-            return
-        }
-
-        // No action if tile already shown
-        if game[row][col].isShown {
-            return
-        }
-
-        // Marking/Unmarking handle by long tap in handleLongPress
-        if game[row][col].isMarked {
-            return
-        }
-
-        // If the cell has not be previously revealed
-        if game[row][col].surroundingMinesCount == 0 && !game[row][col].isMine {
-            selectSurroundingCells(row, col)
-            game[row][col].isShown = true
-
-            collectionView.reloadData()
-            return
-        }
-
-        game[row][col].isShown = true
-        checkGameState()
-
-        collectionView.reloadItems(at: [indexPath])
+        collectionView.reloadData()
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(
-            width: collectionView.frame.height/CGFloat(numRows + 1),
-            height: collectionView.frame.height/CGFloat(numRows + 1)
-        )
+        if let currentGame = game {
+            return CGSize(
+                width: collectionView.frame.height/CGFloat(currentGame.numRows + 1),
+                height: collectionView.frame.height/CGFloat(currentGame.numRows + 1)
+            )
+        }
+
+        return CGSize(width: 20, height: 20)
     }
 
     func collectionView(
@@ -327,34 +137,31 @@ extension GridCollectionViewController: UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
 
         if let gridCell = cell as? GridCollectionViewCell {
-            let row = indexPath.row
-            let col = indexPath.section
-
-            // Configure the cell
-            if game[row][col].isMarked {
-                gridCell.displayMarked()
-            } else if game[row][col].isShown {
-                if game[row][col].isMine {
+            if let tile = game?.getTileForCellAt(indexPath: indexPath) {
+                switch tile.displayState() {
+                case .marked:
+                    gridCell.displayMarked()
+                case .hidden:
+                    gridCell.displayHidden()
+                case .mine:
                     gridCell.displayMine()
-                } else {
-                    gridCell.displayNumber(surroundingMines: game[row][col].surroundingMinesCount)
+                case .number:
+                    gridCell.displayNumber(surroundingMines: tile.surroundingMinesCount)
                 }
-            } else {
-                gridCell.displayHidden()
-            }
 
-            return gridCell
-        } else {
-            return cell
+                return gridCell
+            }
         }
+
+        return cell
     }
 
     // MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return numColumns
+        return game?.numColumns ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numRows
+        return game?.numRows ?? 0
     }
 }

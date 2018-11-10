@@ -27,6 +27,14 @@ class NewGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        updateView()
+    }
+
+    func updateView() {
         rowCountSlider.value = Float(numRows)
         columnCountSlider.value = Float(numColumns)
         mineCountSlider.value = Float(numMines)
@@ -59,30 +67,22 @@ class NewGameViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
-        if segue.identifier == "beginGameSegue" {
-            if let gridVC = segue.destination as? GridCollectionViewController {
-                gridVC.numRows = numRows
-                gridVC.numColumns = numColumns
-                gridVC.numMines = numMines
+        if let gridVC = segue.destination as? GridCollectionViewController {
+            if segue.identifier == "easyGameSegue" {
+                numRows = 8
+                numColumns = 8
+                numMines = 10
+            } else if segue.identifier == "mediumGameSegue" {
+                numRows = 16
+                numColumns = 16
+                numMines = 40
+            } else if segue.identifier == "expertGameSegue" {
+                numRows = 24
+                numColumns = 24
+                numMines = 99
             }
-        } else if segue.identifier == "easyGameSegue" {
-            if let gridVC = segue.destination as? GridCollectionViewController {
-                gridVC.numRows = 8
-                gridVC.numColumns = 8
-                gridVC.numMines = 10
-            }
-        } else if segue.identifier == "mediumGameSegue" {
-            if let gridVC = segue.destination as? GridCollectionViewController {
-                gridVC.numRows = 16
-                gridVC.numColumns = 16
-                gridVC.numMines = 40
-            }
-        } else if segue.identifier == "expertGameSegue" {
-            if let gridVC = segue.destination as? GridCollectionViewController {
-                gridVC.numRows = 24
-                gridVC.numColumns = 24
-                gridVC.numMines = 99
-            }
+
+            gridVC.game = Game(rows: numRows, columns: numColumns, mines: numMines)
         }
     }
 }

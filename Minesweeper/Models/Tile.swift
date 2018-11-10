@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum TileDisplayState {
+    case hidden
+    case marked
+    case number
+    case mine
+}
+
 class Tile {
     var isShown: Bool
     var isMarked: Bool
@@ -19,5 +26,21 @@ class Tile {
         self.isMarked = false
         self.isMine = isMine
         self.surroundingMinesCount = surroundingMinesCount
+    }
+
+    func displayState() -> TileDisplayState {
+        if isMarked {
+            return .marked
+        }
+
+        if !isShown {
+            return .hidden
+        }
+
+        if isMine {
+            return .mine
+        }
+
+        return .number
     }
 }

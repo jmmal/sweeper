@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0306A0582196766700E91C75 /* UILabel+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306A0572196766700E91C75 /* UILabel+CornerRadius.swift */; };
+		0306A05A2196A8A300E91C75 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306A0592196A8A300E91C75 /* Grid.swift */; };
+		0306A05C2196BBCC00E91C75 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306A05B2196BBCC00E91C75 /* Game.swift */; };
 		03595FC82191754400D706D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FC72191754400D706D5 /* AppDelegate.swift */; };
 		03595FCD2191754400D706D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03595FCB2191754400D706D5 /* Main.storyboard */; };
 		03595FCF2191754600D706D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03595FCE2191754600D706D5 /* Assets.xcassets */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0306A0572196766700E91C75 /* UILabel+CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CornerRadius.swift"; sourceTree = "<group>"; };
+		0306A0592196A8A300E91C75 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		0306A05B2196BBCC00E91C75 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		03595FC42191754400D706D5 /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03595FC72191754400D706D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03595FCC2191754400D706D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +85,7 @@
 			children = (
 				03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */,
 				03595FE12195199E00D706D5 /* CALayer+Border.swift */,
+				0306A0572196766700E91C75 /* UILabel+CornerRadius.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -87,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				03595FDF2192FCC600D706D5 /* Tile.swift */,
+				0306A0592196A8A300E91C75 /* Grid.swift */,
+				0306A05B2196BBCC00E91C75 /* Game.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -236,12 +245,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				03595FEF21956F7B00D706D5 /* UIButton+CornerRadius.swift in Sources */,
+				0306A05C2196BBCC00E91C75 /* Game.swift in Sources */,
+				0306A05A2196A8A300E91C75 /* Grid.swift in Sources */,
 				03595FDE2191A12400D706D5 /* GridCollectionViewCell.swift in Sources */,
 				03595FE22195199E00D706D5 /* CALayer+Border.swift in Sources */,
 				03595FDA2191760800D706D5 /* GridCollectionViewController.swift in Sources */,
 				03595FE02192FCC700D706D5 /* Tile.swift in Sources */,
 				03595FC82191754400D706D5 /* AppDelegate.swift in Sources */,
 				03595FDC2191837E00D706D5 /* NewGameViewController.swift in Sources */,
+				0306A0582196766700E91C75 /* UILabel+CornerRadius.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
