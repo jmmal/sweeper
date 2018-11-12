@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GridCollectionViewCell: UICollectionViewCell {
+class GameCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var gridCellLabel: UILabel!
 
     func displayHidden() {

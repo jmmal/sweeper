@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "SweeperCell"
 
-class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegate, GameControllerDelegate {
+class GameCollectionViewController: UIViewController, UIGestureRecognizerDelegate, GameControllerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var gameStateButton: UIButton!
     @IBOutlet weak var totalSecondsLabel: UILabel!
@@ -49,7 +49,7 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
         collectionView.reloadData()
     }
 
-    func setupGame() {
+    private func setupGame() {
         game.setup()
         updateMinesMarkedCount()
     }
@@ -96,7 +96,7 @@ class GridCollectionViewController: UIViewController, UIGestureRecognizerDelegat
 }
 
 // MARK: - CollectionView Delegate and Datasource extensions
-extension GridCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource,
+extension GameCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
     // Updates the cell at the specified indexPath
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -120,7 +120,7 @@ UICollectionViewDelegateFlowLayout {
         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
 
-        if let gridCell = cell as? GridCollectionViewCell {
+        if let gridCell = cell as? GameCollectionViewCell {
             let tile = game.getTileForCellAt(indexPath: indexPath)
 
             switch tile.currentDisplayState() {

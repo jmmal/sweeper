@@ -14,15 +14,21 @@
 		03595FCD2191754400D706D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03595FCB2191754400D706D5 /* Main.storyboard */; };
 		03595FCF2191754600D706D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03595FCE2191754600D706D5 /* Assets.xcassets */; };
 		03595FD22191754600D706D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03595FD02191754600D706D5 /* LaunchScreen.storyboard */; };
-		03595FDA2191760800D706D5 /* GridCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FD92191760800D706D5 /* GridCollectionViewController.swift */; };
+		03595FDA2191760800D706D5 /* GameCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FD92191760800D706D5 /* GameCollectionViewController.swift */; };
 		03595FDC2191837E00D706D5 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDB2191837D00D706D5 /* NewGameViewController.swift */; };
-		03595FDE2191A12400D706D5 /* GridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDD2191A12400D706D5 /* GridCollectionViewCell.swift */; };
+		03595FDE2191A12400D706D5 /* GameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDD2191A12400D706D5 /* GameCollectionViewCell.swift */; };
 		03595FE02192FCC700D706D5 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDF2192FCC600D706D5 /* Tile.swift */; };
 		03595FE22195199E00D706D5 /* CALayer+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FE12195199E00D706D5 /* CALayer+Border.swift */; };
 		03595FEF21956F7B00D706D5 /* UIButton+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */; };
+		036AB99E21999D4B004B08D7 /* GameStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036AB99D21999D4B004B08D7 /* GameStatisticsViewController.swift */; };
+		03A2E26921996207003F9096 /* GameCollectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A2E26821996207003F9096 /* GameCollectionViewControllerTests.swift */; };
+		03A2E26D2199973C003F9096 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A2E26C2199973C003F9096 /* GameStats.swift */; };
 		03C9DB5621991B0E0055EBAD /* GridTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C9DB5521991B0E0055EBAD /* GridTests.swift */; };
 		03C9DB58219927ED0055EBAD /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C9DB57219927ED0055EBAD /* GameTests.swift */; };
+		03C9DB5A219953C20055EBAD /* NewGameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C9DB59219953C20055EBAD /* NewGameViewControllerTests.swift */; };
 		03D180F42197181E00775DE9 /* TileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D180F32197181E00775DE9 /* TileTests.swift */; };
+		1844721630A51188958C6034 /* Pods_MinesweeperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B11D291FEB840F99E5A332A /* Pods_MinesweeperTests.framework */; };
+		5D6D4E7F4525CB0526FCE152 /* Pods_Minesweeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA119BDE74AA2A54A497BE9 /* Pods_Minesweeper.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,23 +45,33 @@
 		0306A0572196766700E91C75 /* UILabel+CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+CornerRadius.swift"; sourceTree = "<group>"; };
 		0306A0592196A8A300E91C75 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		0306A05B2196BBCC00E91C75 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		035240C8D244F74F70A551A3 /* Pods-MinesweeperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinesweeperTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MinesweeperTests/Pods-MinesweeperTests.release.xcconfig"; sourceTree = "<group>"; };
 		03595FC42191754400D706D5 /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03595FC72191754400D706D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03595FCC2191754400D706D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03595FCE2191754600D706D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03595FD12191754600D706D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03595FD32191754600D706D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03595FD92191760800D706D5 /* GridCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewController.swift; sourceTree = "<group>"; };
+		03595FD92191760800D706D5 /* GameCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewController.swift; sourceTree = "<group>"; };
 		03595FDB2191837D00D706D5 /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
-		03595FDD2191A12400D706D5 /* GridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCell.swift; sourceTree = "<group>"; };
+		03595FDD2191A12400D706D5 /* GameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewCell.swift; sourceTree = "<group>"; };
 		03595FDF2192FCC600D706D5 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		03595FE12195199E00D706D5 /* CALayer+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Border.swift"; sourceTree = "<group>"; };
 		03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+CornerRadius.swift"; sourceTree = "<group>"; };
+		036AB99D21999D4B004B08D7 /* GameStatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatisticsViewController.swift; sourceTree = "<group>"; };
+		03A2E26821996207003F9096 /* GameCollectionViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewControllerTests.swift; sourceTree = "<group>"; };
+		03A2E26C2199973C003F9096 /* GameStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStats.swift; sourceTree = "<group>"; };
 		03C9DB5521991B0E0055EBAD /* GridTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTests.swift; sourceTree = "<group>"; };
 		03C9DB57219927ED0055EBAD /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
+		03C9DB59219953C20055EBAD /* NewGameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewControllerTests.swift; sourceTree = "<group>"; };
 		03D180E9219716B200775DE9 /* MinesweeperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinesweeperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D180ED219716B200775DE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03D180F32197181E00775DE9 /* TileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileTests.swift; sourceTree = "<group>"; };
+		3B11D291FEB840F99E5A332A /* Pods_MinesweeperTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinesweeperTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		468C4A3B33F151B7A5C483F0 /* Pods-Minesweeper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minesweeper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Minesweeper/Pods-Minesweeper.debug.xcconfig"; sourceTree = "<group>"; };
+		5DA119BDE74AA2A54A497BE9 /* Pods_Minesweeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Minesweeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA00F93E9DD22472C533C079 /* Pods-Minesweeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minesweeper.release.xcconfig"; path = "Pods/Target Support Files/Pods-Minesweeper/Pods-Minesweeper.release.xcconfig"; sourceTree = "<group>"; };
+		F18048509E96995EA50F9476 /* Pods-MinesweeperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinesweeperTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MinesweeperTests/Pods-MinesweeperTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D6D4E7F4525CB0526FCE152 /* Pods_Minesweeper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1844721630A51188958C6034 /* Pods_MinesweeperTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +100,8 @@
 				03595FC62191754400D706D5 /* Minesweeper */,
 				03D180EA219716B200775DE9 /* MinesweeperTests */,
 				03595FC52191754400D706D5 /* Products */,
+				D39F18FEBA2855B2988541A2 /* Pods */,
+				81638773263FEA082F741968 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +143,7 @@
 				03595FDF2192FCC600D706D5 /* Tile.swift */,
 				0306A0592196A8A300E91C75 /* Grid.swift */,
 				0306A05B2196BBCC00E91C75 /* Game.swift */,
+				03A2E26C2199973C003F9096 /* GameStats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -130,6 +151,7 @@
 		03595FE521951AEC00D706D5 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				036AB99C21999D28004B08D7 /* Statistics */,
 				03595FE821951B3C00D706D5 /* New Game */,
 				03595FE721951B1500D706D5 /* Main */,
 				03595FE621951AF400D706D5 /* Game Grid */,
@@ -140,8 +162,8 @@
 		03595FE621951AF400D706D5 /* Game Grid */ = {
 			isa = PBXGroup;
 			children = (
-				03595FD92191760800D706D5 /* GridCollectionViewController.swift */,
-				03595FDD2191A12400D706D5 /* GridCollectionViewCell.swift */,
+				03595FD92191760800D706D5 /* GameCollectionViewController.swift */,
+				03595FDD2191A12400D706D5 /* GameCollectionViewCell.swift */,
 			);
 			path = "Game Grid";
 			sourceTree = "<group>";
@@ -179,15 +201,45 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		036AB99C21999D28004B08D7 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				036AB99D21999D4B004B08D7 /* GameStatisticsViewController.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		03D180EA219716B200775DE9 /* MinesweeperTests */ = {
 			isa = PBXGroup;
 			children = (
+				03A2E26821996207003F9096 /* GameCollectionViewControllerTests.swift */,
+				03C9DB59219953C20055EBAD /* NewGameViewControllerTests.swift */,
 				03C9DB57219927ED0055EBAD /* GameTests.swift */,
 				03C9DB5521991B0E0055EBAD /* GridTests.swift */,
 				03D180F32197181E00775DE9 /* TileTests.swift */,
 				03D180ED219716B200775DE9 /* Info.plist */,
 			);
 			path = MinesweeperTests;
+			sourceTree = "<group>";
+		};
+		81638773263FEA082F741968 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5DA119BDE74AA2A54A497BE9 /* Pods_Minesweeper.framework */,
+				3B11D291FEB840F99E5A332A /* Pods_MinesweeperTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D39F18FEBA2855B2988541A2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				468C4A3B33F151B7A5C483F0 /* Pods-Minesweeper.debug.xcconfig */,
+				AA00F93E9DD22472C533C079 /* Pods-Minesweeper.release.xcconfig */,
+				F18048509E96995EA50F9476 /* Pods-MinesweeperTests.debug.xcconfig */,
+				035240C8D244F74F70A551A3 /* Pods-MinesweeperTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,10 +249,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03595FD62191754600D706D5 /* Build configuration list for PBXNativeTarget "Minesweeper" */;
 			buildPhases = (
+				E1AFE76351103E22AB28FCDF /* [CP] Check Pods Manifest.lock */,
 				03595FC02191754400D706D5 /* Sources */,
 				03595FC12191754400D706D5 /* Frameworks */,
 				03595FC22191754400D706D5 /* Resources */,
 				03595FEB219553EA00D706D5 /* ShellScript */,
+				39F0F18065433A8A9803DD88 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -215,6 +269,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03D180F2219716B200775DE9 /* Build configuration list for PBXNativeTarget "MinesweeperTests" */;
 			buildPhases = (
+				49B8BB8F8BF4CA119EE60B13 /* [CP] Check Pods Manifest.lock */,
 				03D180E5219716B200775DE9 /* Sources */,
 				03D180E6219716B200775DE9 /* Frameworks */,
 				03D180E7219716B200775DE9 /* Resources */,
@@ -293,17 +348,69 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		39F0F18065433A8A9803DD88 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Minesweeper/Pods-Minesweeper-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Minesweeper/Pods-Minesweeper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		49B8BB8F8BF4CA119EE60B13 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MinesweeperTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1AFE76351103E22AB28FCDF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Minesweeper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -315,11 +422,13 @@
 				03595FEF21956F7B00D706D5 /* UIButton+CornerRadius.swift in Sources */,
 				0306A05C2196BBCC00E91C75 /* Game.swift in Sources */,
 				0306A05A2196A8A300E91C75 /* Grid.swift in Sources */,
-				03595FDE2191A12400D706D5 /* GridCollectionViewCell.swift in Sources */,
+				03595FDE2191A12400D706D5 /* GameCollectionViewCell.swift in Sources */,
 				03595FE22195199E00D706D5 /* CALayer+Border.swift in Sources */,
-				03595FDA2191760800D706D5 /* GridCollectionViewController.swift in Sources */,
+				036AB99E21999D4B004B08D7 /* GameStatisticsViewController.swift in Sources */,
+				03595FDA2191760800D706D5 /* GameCollectionViewController.swift in Sources */,
 				03595FE02192FCC700D706D5 /* Tile.swift in Sources */,
 				03595FC82191754400D706D5 /* AppDelegate.swift in Sources */,
+				03A2E26D2199973C003F9096 /* GameStats.swift in Sources */,
 				03595FDC2191837E00D706D5 /* NewGameViewController.swift in Sources */,
 				0306A0582196766700E91C75 /* UILabel+CornerRadius.swift in Sources */,
 			);
@@ -331,6 +440,8 @@
 			files = (
 				03C9DB5621991B0E0055EBAD /* GridTests.swift in Sources */,
 				03D180F42197181E00775DE9 /* TileTests.swift in Sources */,
+				03C9DB5A219953C20055EBAD /* NewGameViewControllerTests.swift in Sources */,
+				03A2E26921996207003F9096 /* GameCollectionViewControllerTests.swift in Sources */,
 				03C9DB58219927ED0055EBAD /* GameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,6 +594,7 @@
 		};
 		03595FD72191754600D706D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 468C4A3B33F151B7A5C483F0 /* Pods-Minesweeper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -501,6 +613,7 @@
 		};
 		03595FD82191754600D706D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA00F93E9DD22472C533C079 /* Pods-Minesweeper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -519,6 +632,7 @@
 		};
 		03D180F0219716B200775DE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F18048509E96995EA50F9476 /* Pods-MinesweeperTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -539,6 +653,7 @@
 		};
 		03D180F1219716B200775DE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 035240C8D244F74F70A551A3 /* Pods-MinesweeperTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

@@ -37,7 +37,7 @@ class NewGameViewController: UIViewController {
     }
 
     // MARK: - View Updates
-    func updateView() {
+    private func updateView() {
         rowCountSlider.value = Float(numRows)
         columnCountSlider.value = Float(numColumns)
         mineCountSlider.value = Float(numMines)
@@ -45,7 +45,7 @@ class NewGameViewController: UIViewController {
         updateLabels()
     }
 
-    func updateLabels() {
+    private func updateLabels() {
         rowCountLabel.text = String(numRows)
         columnCountLabel.text = String(numColumns)
         mineCountLabel.text = String(numMines)
@@ -70,7 +70,7 @@ class NewGameViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
-        if let gridVC = segue.destination as? GridCollectionViewController {
+        if let gridVC = segue.destination as? GameCollectionViewController {
             if segue.identifier == "easyGameSegue" {
                 numRows = 8
                 numColumns = 8
