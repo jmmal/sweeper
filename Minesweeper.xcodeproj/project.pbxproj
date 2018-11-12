@@ -20,7 +20,8 @@
 		03595FE02192FCC700D706D5 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FDF2192FCC600D706D5 /* Tile.swift */; };
 		03595FE22195199E00D706D5 /* CALayer+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FE12195199E00D706D5 /* CALayer+Border.swift */; };
 		03595FEF21956F7B00D706D5 /* UIButton+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */; };
-		03D180EC219716B200775DE9 /* MinesweeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D180EB219716B200775DE9 /* MinesweeperTests.swift */; };
+		03C9DB5621991B0E0055EBAD /* GridTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C9DB5521991B0E0055EBAD /* GridTests.swift */; };
+		03C9DB58219927ED0055EBAD /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C9DB57219927ED0055EBAD /* GameTests.swift */; };
 		03D180F42197181E00775DE9 /* TileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D180F32197181E00775DE9 /* TileTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,8 +51,9 @@
 		03595FDF2192FCC600D706D5 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		03595FE12195199E00D706D5 /* CALayer+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Border.swift"; sourceTree = "<group>"; };
 		03595FEE21956F7B00D706D5 /* UIButton+CornerRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+CornerRadius.swift"; sourceTree = "<group>"; };
+		03C9DB5521991B0E0055EBAD /* GridTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTests.swift; sourceTree = "<group>"; };
+		03C9DB57219927ED0055EBAD /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		03D180E9219716B200775DE9 /* MinesweeperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinesweeperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		03D180EB219716B200775DE9 /* MinesweeperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperTests.swift; sourceTree = "<group>"; };
 		03D180ED219716B200775DE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03D180F32197181E00775DE9 /* TileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,8 +182,9 @@
 		03D180EA219716B200775DE9 /* MinesweeperTests */ = {
 			isa = PBXGroup;
 			children = (
+				03C9DB57219927ED0055EBAD /* GameTests.swift */,
+				03C9DB5521991B0E0055EBAD /* GridTests.swift */,
 				03D180F32197181E00775DE9 /* TileTests.swift */,
-				03D180EB219716B200775DE9 /* MinesweeperTests.swift */,
 				03D180ED219716B200775DE9 /* Info.plist */,
 			);
 			path = MinesweeperTests;
@@ -326,8 +329,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03D180EC219716B200775DE9 /* MinesweeperTests.swift in Sources */,
+				03C9DB5621991B0E0055EBAD /* GridTests.swift in Sources */,
 				03D180F42197181E00775DE9 /* TileTests.swift in Sources */,
+				03C9DB58219927ED0055EBAD /* GameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,8 +17,8 @@ class Game {
     // MARK: - Properties
     weak var delegate: GameControllerDelegate?
 
-    var timer: Timer?
-    let grid: Grid
+    private var timer: Timer?
+    private let grid: Grid
 
     let numRows: Int
     let numColumns: Int
