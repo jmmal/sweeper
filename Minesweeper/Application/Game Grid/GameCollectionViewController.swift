@@ -4,7 +4,6 @@
 //
 //  Created by Josh Maloney on 6/11/18.
 //  Copyright © 2018 Josh Maloney. All rights reserved.
-//
 
 import UIKit
 
@@ -64,7 +63,6 @@ class GameCollectionViewController: UIViewController, UIGestureRecognizerDelegat
     }
 
     func gameStateDidUpdate(game: Game, withState state: GridState) {
-        print(state)
         switch state {
         case .won:
             gameStateButton.titleLabel?.text = "😍"

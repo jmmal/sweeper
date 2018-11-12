@@ -4,9 +4,17 @@
 //
 //  Created by Josh Maloney on 10/11/18.
 //  Copyright © 2018 Josh Maloney. All rights reserved.
-//
+// swiftlint:disable force_try
 
 import Foundation
+import CoreData
+import UIKit
+
+@objc enum GameStatType: Int16 {
+    case won = 1
+    case lost = 2
+    case quit = 3
+}
 
 protocol GameControllerDelegate: class {
     func gameSecondsCountDidUpdate(game: Game, withTotalSeconds: Int)
@@ -24,6 +32,7 @@ class Game {
     let numColumns: Int
     let numMines: Int
     var secondsCount: Int = 0
+    var statsToReport: Bool = false
 
     // MARK: - Initialisers
     init(rows: Int, columns: Int, mines: Int) {
@@ -33,7 +42,55 @@ class Game {
         grid = Grid(rows: numRows, columns: numColumns, mines: numMines)
     }
 
+    private func reportStatistics() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+
+        // 2
+        let entity =
+            NSEntityDescription.entity(forEntityName: "GameStatistic",
+                                       in: managedContext)!
+
+        let stat = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+
+        let state = grid.getState()
+        var gameType = GameStatType.RawValue()
+
+        if state == .won {
+            gameType = GameStatType.won.rawValue
+        } else if state == .lost {
+            gameType = GameStatType.lost.rawValue
+        } else {
+            gameType = GameStatType.quit.rawValue
+        }
+
+        stat.setValue(numRows, forKey: "rowSize")
+        stat.setValue(numColumns, forKey: "colSize")
+        stat.setValue(secondsCount, forKey: "totalTime")
+        stat.setValue(gameType, forKey: "gameStatus")
+
+        // 4
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+
+        statsToReport = false
+    }
+
     func setup() {
+        if statsToReport {
+            reportStatistics()
+            statsToReport = false
+        }
+
         grid.newGame()
 
         secondsCount = 0
@@ -68,6 +125,7 @@ class Game {
         }
 
         if grid.getState() == .notStarted {
+            statsToReport = true
             startTimer()
             self.delegate?.gameStateDidUpdate(game: self, withState: .inProgress)
         }
@@ -97,12 +155,14 @@ class Game {
     func checkGameState() {
         if grid.getState() == .lost {
             stopGame()
+            reportStatistics()
             self.delegate?.gameStateDidUpdate(game: self, withState: .lost)
             return
         }
 
         if grid.gameWon() == true {
             stopGame()
+            reportStatistics()
             self.delegate?.gameStateDidUpdate(game: self, withState: .won)
         }
     }
