@@ -19,12 +19,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" placeholderIntrinsicWidth="768" placeholderIntrinsicHeight="957" maximumZoomScale="3" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="074-tf-ptE" userLabel="Game Grid View">
-                                <rect key="frame" x="128" y="67" width="768" height="1299"/>
+                                <rect key="frame" x="0.0" y="67" width="1024" height="1299"/>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="768" id="6JZ-K6-nr2"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="jVd-75-uby">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -151,8 +148,8 @@
                             <constraint firstItem="zKE-mW-FLC" firstAttribute="trailing" secondItem="ZkQ-5q-c3M" secondAttribute="trailing" id="390-z8-fkk"/>
                             <constraint firstItem="zKE-mW-FLC" firstAttribute="trailing" secondItem="ZkQ-5q-c3M" secondAttribute="trailing" id="3ms-wJ-Pxz"/>
                             <constraint firstItem="074-tf-ptE" firstAttribute="bottom" secondItem="ZkQ-5q-c3M" secondAttribute="bottom" id="BSV-aa-JO8"/>
-                            <constraint firstItem="ZkQ-5q-c3M" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="074-tf-ptE" secondAttribute="trailing" id="ERh-fE-MTr"/>
-                            <constraint firstItem="074-tf-ptE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZkQ-5q-c3M" secondAttribute="leading" id="KeY-ZV-TR9"/>
+                            <constraint firstItem="074-tf-ptE" firstAttribute="trailing" secondItem="ZkQ-5q-c3M" secondAttribute="trailing" id="IRL-mh-prV"/>
+                            <constraint firstItem="074-tf-ptE" firstAttribute="leading" secondItem="ZkQ-5q-c3M" secondAttribute="leading" id="KeY-ZV-TR9"/>
                             <constraint firstItem="074-tf-ptE" firstAttribute="centerX" secondItem="goq-YD-iUM" secondAttribute="centerX" id="MI0-Kg-mCz"/>
                             <constraint firstItem="zKE-mW-FLC" firstAttribute="leading" secondItem="ZkQ-5q-c3M" secondAttribute="leading" id="NSF-CO-dMq"/>
                             <constraint firstItem="zKE-mW-FLC" firstAttribute="top" secondItem="ZkQ-5q-c3M" secondAttribute="top" id="OTq-Bb-J04"/>
